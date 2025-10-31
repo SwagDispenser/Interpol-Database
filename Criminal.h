@@ -1,16 +1,31 @@
-//
-// Created by Dmitrij Oblockow on 27.10.2025.
-//
+#include "Person.h"
+#include <string>
 
-#ifndef CRIMINAL_H
-#define CRIMINAL_H
+class Criminal : public Person {
 
+private:
+    std::string crimeType;
+    bool isCaptured;
 
+public:
+    Criminal();
+    Criminal(const std::string& id, const std::string& name, const std::string& nat, int age,
+             const std::string& crimeType, bool isCaptured);
 
-class Criminal {
+    Criminal(const Criminal& other);
+    Criminal(Criminal&& other) noexcept;
+    ~Criminal() override;
 
+    std::string getCrimeType() const;
+    void setCrimeType(const std::string&);
+    bool getIsCaptured() const;
+    void setIsCaptured(bool);
+
+    std::string getCategory() const;
+    std::string serialize() const;
+    void deserialize(const std::string& line);
+
+    void markCaptured();
+    void printInfo() const override;
+    bool matches(const std::string& key) const;
 };
-
-
-
-#endif //CRIMINAL_H

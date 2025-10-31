@@ -2,8 +2,7 @@
 #include <sstream>
 
 Criminal::Criminal() : Person(), crimeType(""), isCaptured(false) {}
-Criminal::Criminal(const std::string& id_, const std::string& name_, const std::string& nat, int age_,
-                   const std::string& crimeType_, bool isCaptured_)
+Criminal::Criminal(const std::string& id_, const std::string& name_, const std::string& nat, int age_, const std::string& crimeType_, bool isCaptured_)
     : Person(id_, name_, nat, age_), crimeType(crimeType_), isCaptured(isCaptured_) {}
 
 Criminal::Criminal(const Criminal& other)
@@ -21,7 +20,6 @@ void Criminal::setIsCaptured(bool v) { isCaptured = v; }
 
 std::string Criminal::getCategory() const { return "Criminal"; }
 
-// CSV format: Criminal,id,name,nationality,age,crimeType,isCaptured
 std::string Criminal::serialize() const {
     std::ostringstream oss;
     oss << "Criminal," << id << "," << name << "," << nationality << "," << age << ","
@@ -30,7 +28,6 @@ std::string Criminal::serialize() const {
 }
 
 void Criminal::deserialize(const std::string& line) {
-    // expects CSV fields
     std::istringstream iss(line);
     std::string token;
     std::getline(iss, token, ','); // type
